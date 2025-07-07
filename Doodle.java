@@ -1,3 +1,5 @@
+package Doodle;
+import Doodle.DrawingCanvas;
 import java.util.*;
 import java.awt.*;
 import javax.swing.*;
@@ -34,6 +36,9 @@ class Doodle
 		shapeButton.setBounds(540, 30, 70, 70);
 		ribbon.add(shapeButton);
 		
+		DrawingCanvas canvas = new DrawingCanvas();
+		canvas.setBounds(0, 150, 1500, 850); // below the ribbon
+		frame.add(canvas);
 		
 		frame.add(ribbon);
 
