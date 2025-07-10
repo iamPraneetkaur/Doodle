@@ -21,11 +21,11 @@ public class DrawingCanvas extends JPanel{
     public void setCurrentColor(Color color){
         this.currentColor= color;
     }
+
     public DrawingCanvas(){
         canvasImage= new BufferedImage(1500, 900, BufferedImage.TYPE_INT_ARGB);
         clearCanvas();
         
-
         //Mouse Press(storing starting point)
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e){
@@ -51,10 +51,20 @@ public class DrawingCanvas extends JPanel{
             }
         });
     }
+    //Make canvas White
     public void clearCanvas() {
         Graphics2D g2 = canvasImage.createGraphics();
         g2.setColor(Color.WHITE);
         setCurrentColor(Color.BLACK);
+        g2.fillRect(0, 0, canvasImage.getWidth(), canvasImage.getHeight());
+        g2.dispose();
+        repaint();
+    }
+    //Make canvas Black
+    public void nightCanvas() {
+        Graphics2D g2 = canvasImage.createGraphics();
+        g2.setColor(Color.BLACK);
+        setCurrentColor(Color.WHITE);
         g2.fillRect(0, 0, canvasImage.getWidth(), canvasImage.getHeight());
         g2.dispose();
         repaint();

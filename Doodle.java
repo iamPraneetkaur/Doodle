@@ -1,11 +1,9 @@
 package Doodle;
-
 import Doodle.DrawingCanvas;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
 class Doodle {
 	public static void main(String args[]) {
 		JFrame frame = new JFrame("Doodle");
@@ -40,7 +38,7 @@ class Doodle {
 		toggle.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 30));
 		toggle.setBackground(Color.decode("#ffd0e2"));
 		toggle.setFocusPainted(false);
-		// Behavior		
+		//Behavior		
 		toggle.addItemListener(e -> {
     		if (toggle.isSelected()) {
         		toggle.setText("🌙");
@@ -54,7 +52,7 @@ class Doodle {
 		});
 		ribbon.add(toggle);
 
-		//Color Button
+		//Color Pallete Button
 		JButton colorButton = new JButton("🖍");
 		colorButton.setBounds(550, 30, 80, 80);
 		colorButton.setBackground(Color.decode("#ffd0e2"));
@@ -68,6 +66,7 @@ class Doodle {
 				}
 			}
 		});
+
 		//Save Button
 		JButton saveButton = new JButton("Save");
 		saveButton.setBounds(640, 30, 80, 80);
@@ -88,20 +87,31 @@ class Doodle {
 		eraserButton.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 30));
 		ribbon.add(eraserButton);
 		//Listener
-		eraserButton.addActionListener(new ActionListener() {
+		eraserButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				canvas.setCurrentColor(Color.WHITE);
+				if(toggle.isSelected()){
+					canvas.setCurrentColor(Color.BLACK);
+				}
+				else{
+					canvas.setCurrentColor(Color.WHITE);
+				}
 			}
 		}); 
+
 		// Clear Button
 		JButton clearButton = new JButton("Clear");
 		clearButton.setBounds(820, 40, 100, 50);
 		clearButton.setBackground(Color.decode("#ffe2ed"));
 		clearButton.setFont(myFont);
 		ribbon.add(clearButton);
-		clearButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				canvas.clearCanvas();
+		clearButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(toggle.isSelected()){
+					canvas.nightCanvas();
+				}
+				else{
+					canvas.clearCanvas();
+				}
 			}
 		});
 
@@ -110,7 +120,7 @@ class Doodle {
 		brushLabel.setBounds(1200, 20, 100, 20);
 		brushLabel.setBackground(Color.decode("#ffe2ed"));
 		ribbon.add(brushLabel);
-		// Slider for pointer size
+		//Slider for pointer size
 		JSlider brushSlider = new JSlider(1, 50, 2);
 		brushSlider.setBounds(1150, 40, 200, 50);
 		brushSlider.setMajorTickSpacing(10);
@@ -118,14 +128,11 @@ class Doodle {
 		brushSlider.setPaintTicks(true);
 		brushSlider.setPaintLabels(true);
 		ribbon.add(brushSlider);
-		// Listener to update pointer size
+		//Listener to update pointer size
 		brushSlider.addChangeListener(e -> {
 			int newSize = brushSlider.getValue();
 			canvas.setBrushSize(newSize);
 		});
-
-		
-
 		frame.add(ribbon);
 
 		frame.setVisible(true);
